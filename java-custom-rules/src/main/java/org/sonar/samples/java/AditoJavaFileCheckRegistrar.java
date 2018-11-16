@@ -19,18 +19,9 @@
  */
 package org.sonar.samples.java;
 
-import java.util.Arrays;
 import java.util.List;
 import org.sonar.plugins.java.api.CheckRegistrar;
 import org.sonar.plugins.java.api.JavaCheck;
-import org.sonar.samples.java.checks.AvoidAnnotationRule;
-import org.sonar.samples.java.checks.AvoidBrandInMethodNamesRule;
-import org.sonar.samples.java.checks.AvoidMethodDeclarationRule;
-import org.sonar.samples.java.checks.AvoidSuperClassRule;
-import org.sonar.samples.java.checks.AvoidUnmodifiableListRule;
-import org.sonar.samples.java.checks.MyCustomSubscriptionRule;
-import org.sonar.samples.java.checks.SecurityAnnotationMandatoryRule;
-import org.sonar.samples.java.checks.SpringControllerRequestMappingEntityRule;
 import org.sonarsource.api.sonarlint.SonarLintSide;
 
 /**
@@ -40,7 +31,7 @@ import org.sonarsource.api.sonarlint.SonarLintSide;
  * This class is a batch extension by implementing the {@link org.sonar.plugins.java.api.CheckRegistrar} interface.
  */
 @SonarLintSide
-public class MyJavaFileCheckRegistrar implements CheckRegistrar {
+public class AditoJavaFileCheckRegistrar implements CheckRegistrar {
 
   /**
    * Register the classes that will be used to instantiate checks during analysis.
@@ -48,7 +39,7 @@ public class MyJavaFileCheckRegistrar implements CheckRegistrar {
   @Override
   public void register(RegistrarContext registrarContext) {
     // Call to registerClassesForRepository to associate the classes with the correct repository key
-    registrarContext.registerClassesForRepository(MyJavaRulesDefinition.REPOSITORY_KEY, checkClasses(), testCheckClasses());
+    registrarContext.registerClassesForRepository(AditoJavaRulesDefinition.REPOSITORY_KEY, checkClasses(), testCheckClasses());
   }
 
   /**

@@ -37,27 +37,26 @@ import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionAnnotationLoader;
 import org.sonar.api.utils.AnnotationUtils;
 import org.sonar.check.Cardinality;
-import org.sonar.plugins.java.Java;
 import org.sonar.squidbridge.annotations.RuleTemplate;
 
 /**
  * Declare rule metadata in server repository of rules. 
  * That allows to list the rules in the page "Rules".
  */
-public class MyJavaRulesDefinition implements RulesDefinition {
+public class AditoJavaRulesDefinition implements RulesDefinition {
 
   // don't change that because the path is hard coded in CheckVerifier
   private static final String RESOURCE_BASE_PATH = "/org/sonar/l10n/java/rules/squid";
 
-  public static final String REPOSITORY_KEY = "mycompany-java";
+  public static final String REPOSITORY_KEY = "adito-java";
 
   private final Gson gson = new Gson();
 
   @Override
   public void define(Context context) {
     NewRepository repository = context
-      .createRepository(REPOSITORY_KEY, Java.KEY)
-      .setName("MyCompany Custom Repository");
+      .createRepository(REPOSITORY_KEY, "java") //Java.KEY
+      .setName("Adito Custom Repository");
 
     List<Class> checks = RulesList.getChecks();
     new RulesDefinitionAnnotationLoader().load(repository, Iterables.toArray(checks, Class.class));
@@ -104,7 +103,7 @@ public class MyJavaRulesDefinition implements RulesDefinition {
   }
 
   private void addMetadata(NewRule rule, String metadataKey) {
-    URL resource = MyJavaRulesDefinition.class.getResource(RESOURCE_BASE_PATH + "/" + metadataKey + "_java.json");
+    URL resource = AditoJavaRulesDefinition.class.getResource(RESOURCE_BASE_PATH + "/" + metadataKey + "_java.json");
     if (resource != null) {
       RuleMetatada metatada = gson.fromJson(readResource(resource), RuleMetatada.class);
       rule.setSeverity(metatada.defaultSeverity.toUpperCase(Locale.US));
@@ -120,7 +119,7 @@ public class MyJavaRulesDefinition implements RulesDefinition {
   }
 
   private static void addHtmlDescription(NewRule rule, String metadataKey) {
-    URL resource = MyJavaRulesDefinition.class.getResource(RESOURCE_BASE_PATH + "/" + metadataKey + "_java.html");
+    URL resource = AditoJavaRulesDefinition.class.getResource(RESOURCE_BASE_PATH + "/" + metadataKey + "_java.html");
     if (resource != null) {
       rule.setHtmlDescription(readResource(resource));
     }

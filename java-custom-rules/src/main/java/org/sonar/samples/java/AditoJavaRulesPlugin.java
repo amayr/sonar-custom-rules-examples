@@ -17,16 +17,24 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.samples.java.checks;
+package org.sonar.samples.java;
 
-import org.junit.Test;
-import org.sonar.java.checks.verifier.JavaCheckVerifier;
+import org.sonar.api.Plugin;
 
-public class SpringControllerRequestMappingEntityRuleTest {
+/**
+ * Einstiegspunkt für das Adito Rules Plugin, das die Custom-Rules enthält
+ */
+public class AditoJavaRulesPlugin implements Plugin {
 
-  @Test
-  public void check() {
-    JavaCheckVerifier.verify("src/test/files/SpringControllerRequestMappingEntityRule.java", new SpringControllerRequestMappingEntityRule());
+  @Override
+  public void define(Context context) {
+
+    // server extensions -> objects are instantiated during server startup
+    context.addExtension(AditoJavaRulesDefinition.class);
+
+    // batch extensions -> objects are instantiated during code analysis
+    context.addExtension(AditoJavaFileCheckRegistrar.class);
+
   }
 
 }

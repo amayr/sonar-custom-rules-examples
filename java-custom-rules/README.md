@@ -1,3 +1,3 @@
-This example demonstrates how to write **Custom Rules** for the SonarQube Java Analyzer (aka SonarJava).
+Dieses Beispiel zeigt die Implementierung von **Custom Rules** für den SonarQube Java Analyzer (aka SonarJava).
 
-It requires to install **SonarJava** **4.7.1.9272** on your SonarQube 5.6+
+Es wird **SonarJava** **4.7.1.9272** auf dem SonarQube 5.6+ benötigt (und muss gegebenenfalls installiert werden).
